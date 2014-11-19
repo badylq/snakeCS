@@ -28,8 +28,8 @@ namespace snake
 		{
 			PositionX = myRandom.Next(1, 17);
 			PositionY = myRandom.Next(1, 17);
-			location.X=PositionX*25+mapLocation.X;
-			location.Y=PositionY*25+mapLocation.Y;
+			location.X = PositionX * 25 + mapLocation.X;
+			location.Y = PositionY * 25 + mapLocation.Y;
 			myPictureBox.Location = location;
 			myPictureBox.Update();
 		}

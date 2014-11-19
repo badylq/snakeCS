@@ -19,6 +19,7 @@ namespace snake
 		public Snake()
 		{
 			InitializeComponent();
+			
 		}
 
 		private void Snake_Load(object sender, EventArgs e)
@@ -28,6 +29,7 @@ namespace snake
 			Apple = new Item(100, ImageItemApple, p, MyRandom);
 			PlayerSnake = new Player(3, 10, ImageSnakeHead, ImageSnakeBody,p,Apple);
 			this.Update();
+
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
@@ -39,5 +41,6 @@ namespace snake
 		{
 
 		}
+
 	}
 }

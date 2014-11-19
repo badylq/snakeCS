@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace snake
 {
-	public class Player
+	public class Player : Form
 	{
 		public Player(int minLength, int maxLength, PictureBox imageHead, PictureBox imageBody,Point mapLocation, Item items)
 		{
@@ -28,9 +28,13 @@ namespace snake
 			this.imageBody = imageBody;
 			this.imageHead = imageHead;
 			this.items = items;
+			this.direction = 0;
+			this.mapLocation = mapLocation;
+			this.addBodyPart();
 
 			this.CreatePlayer();
 		}
+		public PictureBox ImageBodyPart;
 		private int minLength;
 		private int maxLength;
 		private Point[] location;
@@ -41,18 +45,20 @@ namespace snake
 		private int positionX;
 		private int positionY;
 		private Point positionXY;
+		private Byte direction;
 		public void CreatePlayer()
 		{
+			MessageBox.Show("= " + this.mapLocation.X);
 			location = new Point[maxLength];
 			for (int i=0;i<minLength;i++)
 			{
-				location[i].X = 9;
-				location[i].Y = 9 + i;
+				location[i].X = 10;
+				location[i].Y = 10 + i;
 				if (i > 0)
 				{
 					positionX = location[i].X;
 					positionY = location[i].Y;
-					positionXY.X = positionX * 25 + mapLocation.X;
+					positionXY.X = positionX * 25 + this.mapLocation.X ;
 					positionXY.Y = positionY * 25 + mapLocation.Y;
 					imageBody.Location = positionXY;
 					imageBody.Update();
@@ -67,5 +73,15 @@ namespace snake
 			items.SetPosition();
 		}
 
+		private void addBodyPart()
+		{
+			ImageBodyPart = new PictureBox();
+			ImageBodyPart.Location = new Point(0, 0);
+			ImageBodyPart.Size = new System.Drawing.Size(25, 25);
+			ImageBodyPart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			ImageBodyPart.Image = global::snake.Properties.Resources.SnakeBody;
+			ImageBodyPart.Visible = true;
+			this.Controls.Add(ImageBodyPart);
+		}
 	}
 }

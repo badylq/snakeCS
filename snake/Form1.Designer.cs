@@ -1,4 +1,5 @@
-﻿namespace snake
+﻿
+namespace snake
 {
 	partial class Snake
 	{
@@ -113,6 +114,7 @@
 		private System.Windows.Forms.PictureBox ImageSnakeBody;
 		private System.Windows.Forms.PictureBox ImageSnakeHead;
 		private System.Windows.Forms.Timer timer1;
+
 	}
 }
 
