@@ -32,12 +32,10 @@ namespace snake
 			this.components = new System.ComponentModel.Container();
 			this.ImageMap = new System.Windows.Forms.PictureBox();
 			this.ImageItemApple = new System.Windows.Forms.PictureBox();
-			this.ImageSnakeBody = new System.Windows.Forms.PictureBox();
 			this.ImageSnakeHead = new System.Windows.Forms.PictureBox();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImageItemApple)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.ImageSnakeBody)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImageSnakeHead)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -62,16 +60,6 @@ namespace snake
 			this.ImageItemApple.TabIndex = 1;
 			this.ImageItemApple.TabStop = false;
 			// 
-			// ImageSnakeBody
-			// 
-			this.ImageSnakeBody.Image = global::snake.Properties.Resources.SnakeBody;
-			this.ImageSnakeBody.Location = new System.Drawing.Point(13, 70);
-			this.ImageSnakeBody.Name = "ImageSnakeBody";
-			this.ImageSnakeBody.Size = new System.Drawing.Size(25, 25);
-			this.ImageSnakeBody.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.ImageSnakeBody.TabIndex = 2;
-			this.ImageSnakeBody.TabStop = false;
-			// 
 			// ImageSnakeHead
 			// 
 			this.ImageSnakeHead.Image = global::snake.Properties.Resources.SnakeHead;
@@ -92,7 +80,6 @@ namespace snake
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(584, 561);
 			this.Controls.Add(this.ImageSnakeHead);
-			this.Controls.Add(this.ImageSnakeBody);
 			this.Controls.Add(this.ImageItemApple);
 			this.Controls.Add(this.ImageMap);
 			this.Name = "Snake";
@@ -100,7 +87,6 @@ namespace snake
 			this.Load += new System.EventHandler(this.Snake_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImageItemApple)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.ImageSnakeBody)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImageSnakeHead)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -111,7 +97,6 @@ namespace snake
 
 		private System.Windows.Forms.PictureBox ImageMap;
 		private System.Windows.Forms.PictureBox ImageItemApple;
-		private System.Windows.Forms.PictureBox ImageSnakeBody;
 		private System.Windows.Forms.PictureBox ImageSnakeHead;
 		private System.Windows.Forms.Timer timer1;
 
