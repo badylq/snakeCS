@@ -31,7 +31,7 @@ namespace snake
 			this.mapLocation = mapLocation;
 			this.control = control;
 			ImageBodyParts = new List<PictureBox>();
-			this.CreatePlayer();
+			//this.CreatePlayer();
 
 			this.addBodyPart(0, 0);
 			this.addBodyPart(0, 50);
@@ -78,7 +78,7 @@ namespace snake
 
 		}
 
-		private void addBodyPart(int x, int y)
+		public void addBodyPart(int x, int y)
 		{
 			PictureBox ImageBodyPart;
 			ImageBodyPart = new PictureBox();
@@ -91,6 +91,7 @@ namespace snake
 
 			ImageBodyParts.Add(ImageBodyPart);
 			this.control.Add(ImageBodyParts[ImageBodyParts.Count - 1]);
+			ImageBodyPart = null;
 
 			MessageBox.Show("Ile = " + ImageBodyParts.Count);
 		}
