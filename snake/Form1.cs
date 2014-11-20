@@ -34,7 +34,8 @@ namespace snake
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-			this.PlayerSnake.Step();
+			if (this.PlayerSnake.Step())
+				this.timer1.Enabled = false;
 			this.Update();
 			this.keyLock = false;
 		}

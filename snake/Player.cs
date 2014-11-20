@@ -95,7 +95,7 @@ namespace snake
 			ImageBodyPart = null;
 		}
 
-		public void Step()
+		public bool Step()
 		{
 			Point tempLocation1;
 			Point tempLocation2 = new Point(0,0);
@@ -132,7 +132,12 @@ namespace snake
 					location[i] = tempLocation1;
 				}
 			}
+
 			this.DrawPlayer();
+			if (this.Colision())
+				return true;
+			else
+				return false;
 		}
 		private void DrawPlayer()
 		{
@@ -189,7 +194,7 @@ namespace snake
 
 		}
 
-		public Image RotateImage(Image img, float rotationAngle)
+		private Image RotateImage(Image img, float rotationAngle)
 		{
 			if (rotationAngle == 90) 
 				img.RotateFlip(RotateFlipType.Rotate90FlipNone);
@@ -201,6 +206,32 @@ namespace snake
 				img.RotateFlip(RotateFlipType.RotateNoneFlipNone);
 
 			return img;
+		}
+
+		private bool Colision()
+		{
+			if(this.location[0].X < 1)
+			{
+				this.ImageBodyParts[0].Image = global::snake.Properties.Resources.WaterDead;
+				return true;
+			}
+			else if (this.location[0].X > 18)
+			{
+				this.ImageBodyParts[0].Image = global::snake.Properties.Resources.WaterDead;
+				return true;
+			}
+			else if (this.location[0].Y < 1)
+			{
+				this.ImageBodyParts[0].Image = global::snake.Properties.Resources.WaterDead;
+				return true;
+			}
+			else if (this.location[0].Y > 18)
+			{
+				this.ImageBodyParts[0].Image = global::snake.Properties.Resources.WaterDead;
+				return true;
+			}
+			else
+				return false;
 		}
 	}
 }

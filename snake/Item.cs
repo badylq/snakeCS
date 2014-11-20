@@ -26,8 +26,8 @@ namespace snake
 		private Random myRandom;
 		public void SetPosition()
 		{
-			PositionX = myRandom.Next(1, 17);
-			PositionY = myRandom.Next(1, 17);
+			PositionX = myRandom.Next(1, 18);
+			PositionY = myRandom.Next(1, 18);
 			location.X = PositionX * 25 + mapLocation.X;
 			location.Y = PositionY * 25 + mapLocation.Y;
 			myPictureBox.Location = location;
