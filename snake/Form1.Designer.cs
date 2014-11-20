@@ -30,14 +30,28 @@ namespace snake
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.ImageMap = new System.Windows.Forms.PictureBox();
-			this.ImageItemApple = new System.Windows.Forms.PictureBox();
-			this.ImageSnakeHead = new System.Windows.Forms.PictureBox();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
-			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).BeginInit();
+			this.ImageItemApple = new System.Windows.Forms.PictureBox();
+			this.ImageMap = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.ImageItemApple)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.ImageSnakeHead)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// timer1
+			// 
+			this.timer1.Enabled = true;
+			this.timer1.Interval = 250;
+			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+			// 
+			// ImageItemApple
+			// 
+			this.ImageItemApple.Image = global::snake.Properties.Resources.ItemApple;
+			this.ImageItemApple.Location = new System.Drawing.Point(13, 13);
+			this.ImageItemApple.Name = "ImageItemApple";
+			this.ImageItemApple.Size = new System.Drawing.Size(25, 25);
+			this.ImageItemApple.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.ImageItemApple.TabIndex = 1;
+			this.ImageItemApple.TabStop = false;
 			// 
 			// ImageMap
 			// 
@@ -50,46 +64,19 @@ namespace snake
 			this.ImageMap.TabStop = false;
 			this.ImageMap.Click += new System.EventHandler(this.ImageMap_Click);
 			// 
-			// ImageItemApple
-			// 
-			this.ImageItemApple.Image = global::snake.Properties.Resources.ItemApple;
-			this.ImageItemApple.Location = new System.Drawing.Point(13, 13);
-			this.ImageItemApple.Name = "ImageItemApple";
-			this.ImageItemApple.Size = new System.Drawing.Size(25, 25);
-			this.ImageItemApple.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.ImageItemApple.TabIndex = 1;
-			this.ImageItemApple.TabStop = false;
-			// 
-			// ImageSnakeHead
-			// 
-			this.ImageSnakeHead.Image = global::snake.Properties.Resources.SnakeHead;
-			this.ImageSnakeHead.Location = new System.Drawing.Point(13, 127);
-			this.ImageSnakeHead.Name = "ImageSnakeHead";
-			this.ImageSnakeHead.Size = new System.Drawing.Size(25, 25);
-			this.ImageSnakeHead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.ImageSnakeHead.TabIndex = 3;
-			this.ImageSnakeHead.TabStop = false;
-			// 
-			// timer1
-			// 
-			this.timer1.Enabled = true;
-			this.timer1.Interval = 500;
-			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-			// 
 			// Snake
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(584, 561);
-			this.Controls.Add(this.ImageSnakeHead);
 			this.Controls.Add(this.ImageItemApple);
 			this.Controls.Add(this.ImageMap);
 			this.Name = "Snake";
 			this.Text = "SnakeCS";
 			this.Load += new System.EventHandler(this.Snake_Load);
-			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).EndInit();
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Snake_KeyDown);
 			((System.ComponentModel.ISupportInitialize)(this.ImageItemApple)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.ImageSnakeHead)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -99,7 +86,6 @@ namespace snake
 
 		private System.Windows.Forms.PictureBox ImageMap;
 		private System.Windows.Forms.PictureBox ImageItemApple;
-		private System.Windows.Forms.PictureBox ImageSnakeHead;
 		private System.Windows.Forms.Timer timer1;
 
 	}

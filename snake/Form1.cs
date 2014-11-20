@@ -12,10 +12,11 @@ namespace snake
 {
 	public partial class Snake : Form
 	{
-		public Point p;
-		public Item Apple;
-		public Random MyRandom;
-		public Player PlayerSnake;
+		private Point p;
+		private Item Apple;
+		private Random MyRandom;
+		private Player PlayerSnake;
+		private bool keyLock;
 		public Snake()
 		{
 			InitializeComponent();
@@ -27,19 +28,29 @@ namespace snake
 			p = ImageMap.Location;
 			MyRandom = new Random();
 			Apple = new Item(100, ImageItemApple, p, MyRandom);
-			PlayerSnake = new Player(3, 10, ImageSnakeHead,p,Apple,Controls);
+			PlayerSnake = new Player(90, 100, p,Apple,Controls);
 			this.Update();
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-			PlayerSnake.step(0);
+			this.PlayerSnake.Step();
 			this.Update();
+			this.keyLock = false;
 		}
 
 		private void ImageMap_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void Snake_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (!this.keyLock)
+			{
+				this.PlayerSnake.ChangeDirection(e);
+				this.keyLock = true;
+			}
 		}
 
 	}
