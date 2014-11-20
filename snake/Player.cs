@@ -86,9 +86,62 @@ namespace snake
 
 			ImageBodyParts.Add(ImageBodyPart);
 			control.Add(ImageBodyParts[ImageBodyParts.Count - 1]);
+			ImageBodyParts[ImageBodyParts.Count - 1].BringToFront();
 			ImageBodyPart = null;
+		}
 
-			MessageBox.Show("Ile = " + ImageBodyParts.Count);
+		public void step(byte direction)
+		{
+			this.direction = direction;
+			Point tempLocation1;
+			Point tempLocation2;
+
+			for (int i = 0; i < location.Length-1; i++)
+			{
+				tempLocation2 = location[i];
+				if(i==0)
+				{
+					tempLocation2 = location[i];
+					switch (this.direction)
+					{
+						case 0:
+							location[i].Y -= 1;
+							//MessageBox.Show("Test");
+							break;
+						case 1:
+							location[i].X += 1;
+							break;
+						case 2:
+							location[i].Y += 1;
+							break;
+						case 3:
+							location[i].X -= 1;
+							break;
+						default:
+							MessageBox.Show("Błędny kierunek");
+							break;
+					}
+				}
+				else
+				{
+					tempLocation1 = tempLocation2; ;
+					location[i] = tempLocation1;
+					tempLocation1 = tempLocation2;
+				}
+			}
+			this.DrawPlayer();
+		}
+		private void DrawPlayer()
+		{
+			for (int i = 0; i < ImageBodyParts.Count; i++)
+			{
+				positionX = location[i].X;
+				positionY = location[i].Y;
+				positionXY.X = positionX * 25 + this.mapLocation.X;
+				positionXY.Y = positionY * 25 + mapLocation.Y;
+				ImageBodyParts[i].Location = positionXY;
+				ImageBodyParts[i].Update();
+			}
 		}
 	}
 }

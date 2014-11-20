@@ -72,6 +72,8 @@ namespace snake
 			// 
 			// timer1
 			// 
+			this.timer1.Enabled = true;
+			this.timer1.Interval = 500;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// Snake
@@ -83,7 +85,7 @@ namespace snake
 			this.Controls.Add(this.ImageItemApple);
 			this.Controls.Add(this.ImageMap);
 			this.Name = "Snake";
-			this.Text = "Form1";
+			this.Text = "SnakeCS";
 			this.Load += new System.EventHandler(this.Snake_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ImageItemApple)).EndInit();
