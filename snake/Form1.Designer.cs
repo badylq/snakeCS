@@ -46,7 +46,7 @@ namespace snake
 			this.ImageMap.Name = "ImageMap";
 			this.ImageMap.Size = new System.Drawing.Size(500, 500);
 			this.ImageMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.ImageMap.TabIndex = 0;
+			this.ImageMap.TabIndex = 10;
 			this.ImageMap.TabStop = false;
 			this.ImageMap.Click += new System.EventHandler(this.ImageMap_Click);
 			// 

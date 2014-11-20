@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace snake
 {
-	public class Player : Form
+	public class Player
 	{
 		public Player(int minLength, int maxLength, PictureBox imageHead, Point mapLocation, Item items, Control.ControlCollection control)
 		{
@@ -31,10 +31,9 @@ namespace snake
 			this.mapLocation = mapLocation;
 			this.control = control;
 			ImageBodyParts = new List<PictureBox>();
-			//this.CreatePlayer();
+			
+			this.CreatePlayer();
 
-			this.addBodyPart(0, 0);
-			this.addBodyPart(0, 50);
 		}
 
 		private List<PictureBox> ImageBodyParts;
@@ -62,10 +61,7 @@ namespace snake
 					positionY = location[i].Y;
 					positionXY.X = positionX * 25 + this.mapLocation.X ;
 					positionXY.Y = positionY * 25 + mapLocation.Y;
-					//imageBody.Location = positionXY;
-					//imageBody.Update();
-
-					addBodyPart(100,100);
+					addBodyPart(positionXY);
 				}
 			}
 			positionX = location[0].X;
@@ -78,19 +74,18 @@ namespace snake
 
 		}
 
-		public void addBodyPart(int x, int y)
+		public void addBodyPart(Point location)
 		{
 			PictureBox ImageBodyPart;
 			ImageBodyPart = new PictureBox();
 
-			ImageBodyPart.Location = new Point(x, y);
+			ImageBodyPart.Location = location;
 			ImageBodyPart.Size = new System.Drawing.Size(25, 25);
 			ImageBodyPart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			ImageBodyPart.Image = global::snake.Properties.Resources.SnakeBody;
-			ImageBodyPart.Visible = true;
 
 			ImageBodyParts.Add(ImageBodyPart);
-			this.control.Add(ImageBodyParts[ImageBodyParts.Count - 1]);
+			control.Add(ImageBodyParts[ImageBodyParts.Count - 1]);
 			ImageBodyPart = null;
 
 			MessageBox.Show("Ile = " + ImageBodyParts.Count);

@@ -28,9 +28,8 @@ namespace snake
 			MyRandom = new Random();
 			Apple = new Item(100, ImageItemApple, p, MyRandom);
 			PlayerSnake = new Player(3, 10, ImageSnakeHead,p,Apple,Controls);
-			PlayerSnake.addBodyPart(200, 200);
 			this.Update();
-
+			ImageMap.SendToBack();
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
