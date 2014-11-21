@@ -282,7 +282,7 @@ namespace snake
 				while(!selfCrash && i<location.Length)
 				{
 					if (location[0].X == location[i].X && location[0].Y == location[i].Y)
-						//selfCrash = true;
+						selfCrash = true;
 					else
 						selfCrash = false;
 					i++;
