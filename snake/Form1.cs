@@ -13,7 +13,6 @@ namespace snake
 	public partial class Snake : Form
 	{
 		private Point p;
-		private Item Apple;
 		private Random MyRandom;
 		private Player PlayerSnake;
 		private bool keyLock;
@@ -27,8 +26,7 @@ namespace snake
 		{
 			p = ImageMap.Location;
 			MyRandom = new Random();
-			Apple = new Item(100, ImageItemApple, p, MyRandom);
-			PlayerSnake = new Player(90, 100, p,Apple,Controls);
+			PlayerSnake = new Player(90, 100, p,Controls, MyRandom, textScore, timer1);
 			this.Update();
 		}
 
@@ -47,7 +45,7 @@ namespace snake
 
 		private void Snake_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (!this.keyLock)
+			if (!this.keyLock && timer1.Enabled == true)
 			{
 				this.PlayerSnake.ChangeDirection(e);
 				this.keyLock = true;

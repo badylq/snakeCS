@@ -11,7 +11,8 @@ namespace snake
 {
 	public class Player
 	{
-		public Player(int minLength, int maxLength, Point mapLocation, Item items, Control.ControlCollection control)
+		public Player(int minLength, int maxLength, Point mapLocation, Control.ControlCollection control, Random myRandom,
+			ToolStripStatusLabel textScore, Timer timer)
 		{
 			if (minLength < 3)
 				this.minLength = 3;
@@ -26,29 +27,42 @@ namespace snake
 			else
 				this.maxLength = maxLength;
 
-			this.items = items;
+			extend = false;
+			this.textScore = textScore;
 			this.direction = 0;
 			this.mapLocation = mapLocation;
 			this.control = control;
 			ImageBodyParts = new List<PictureBox>();
-
-			//imageHead.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
-			
+			this.myRandom = myRandom;
+			score = 0;
+			points = 10;
+			this.speedUps = 0;
+			this.timer = timer;
+			this.eatCounter = 0;
 			this.CreatePlayer();
 
 		}
 
+		private int eatCounter;
+		private ToolStripStatusLabel textScore;
+		private Random myRandom;
 		private List<PictureBox> ImageBodyParts;
 		private int minLength;
 		private int maxLength;
 		private Point[] location;
-		private Item items;
 		private Point mapLocation;
 		private int positionX;
 		private int positionY;
 		private Point positionXY;
 		private Byte direction;
 		private Control.ControlCollection control;
+		private Item apple;
+		private PictureBox itemApple;
+		private int score;
+		private int points;
+		private bool extend;
+		private Timer timer;
+		private int speedUps;
 		private void CreatePlayer()
 		{
 			location = new Point[maxLength];
@@ -75,11 +89,17 @@ namespace snake
 					addBodyPart(positionXY, global::snake.Properties.Resources.SnakeBody);
 				}
 			}
-			items.SetPosition();
-
+			itemApple = new PictureBox();
+			itemApple.Size = new System.Drawing.Size(25, 25);
+			itemApple.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			itemApple.Image = global::snake.Properties.Resources.ItemApple;;
+			apple = new Item(this.points, this.itemApple, this.mapLocation, this.myRandom);
+			control.Add(itemApple);
+			itemApple.BringToFront();
+			apple.SetPosition();
 		}
 
-		public void addBodyPart(Point location, Image img)
+		private void addBodyPart(Point location, Image img)
 		{
 			PictureBox ImageBodyPart;
 			ImageBodyPart = new PictureBox();
@@ -95,6 +115,15 @@ namespace snake
 			ImageBodyPart = null;
 		}
 
+		private void extendSnake(Point newPartLocation)
+		{
+			positionX = newPartLocation.X;
+			positionY = newPartLocation.Y;
+			positionXY.X = positionX * 25 + this.mapLocation.X ;
+			positionXY.Y = positionY * 25 + this.mapLocation.Y;
+			addBodyPart(positionXY, global::snake.Properties.Resources.SnakeBody);
+			extend = false;
+		}
 		public bool Step()
 		{
 			Point tempLocation1;
@@ -132,8 +161,21 @@ namespace snake
 					location[i] = tempLocation1;
 				}
 			}
-
+			if (this.extend)
+				this.extendSnake(tempLocation2);
 			this.DrawPlayer();
+			if(this.apple.CollisinCheck(this.location[0]))
+			{
+				this.score += this.points;
+				this.extend = true;
+				this.eatCounter += 1;
+				this.textScore.Text = "Score : " + this.score;
+				if(eatCounter>1 && timer.Interval>25)
+				{
+					timer.Interval -= 50/speedUps;
+					this.speedUps += 1;
+				}
+			}
 			if (this.Colision())
 				return true;
 			else
@@ -160,7 +202,6 @@ namespace snake
 					{
 						this.ImageBodyParts[0].Image = this.RotateImage(global::snake.Properties.Resources.SnakeHead, 270);
 						this.direction = 3;
-						//this.Step();
 					}
 					break;
 				case Keys.Up:
@@ -168,7 +209,6 @@ namespace snake
 					{
 						this.ImageBodyParts[0].Image = this.RotateImage(global::snake.Properties.Resources.SnakeHead, 0);
 						this.direction = 0;
-						//this.Step();
 					}
 					break;
 				case Keys.Right:
@@ -176,7 +216,6 @@ namespace snake
 					{
 						this.ImageBodyParts[0].Image = this.RotateImage(global::snake.Properties.Resources.SnakeHead, 90);
 						this.direction = 1;
-						//this.Step();
 					}
 					break;
 				case Keys.Down:
@@ -184,7 +223,6 @@ namespace snake
 					{
 						this.ImageBodyParts[0].Image = this.RotateImage(global::snake.Properties.Resources.SnakeHead, 180);
 						this.direction = 2;
-						//this.Step();
 					}
 					break;
 				default:

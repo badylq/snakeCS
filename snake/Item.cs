@@ -18,10 +18,10 @@ namespace snake
 			this.myRandom = myRandom;
 		}
 		private int points;
-		public int PositionX;
-		public int PositionY;
+		private int PositionX;
+		private int PositionY;
 		private PictureBox myPictureBox;
-		private Point location;
+		public Point location;
 		private Point mapLocation;
 		private Random myRandom;
 		public void SetPosition()
@@ -33,15 +33,15 @@ namespace snake
 			myPictureBox.Location = location;
 			myPictureBox.Update();
 		}
-		public int CollisinCheck(Point[] playerLocation)
+		public bool CollisinCheck(Point playerLocation)
 		{
-			if ((int)playerLocation[0].X == PositionX && (int)playerLocation[0].Y == PositionY)
+			if ((int)playerLocation.X == PositionX && (int)playerLocation.Y == PositionY)
 			{
 				this.SetPosition();
-				return points;
+				return true;
 			}
 			else
-				return 0;
+				return false;
 		}
 	}
 }
