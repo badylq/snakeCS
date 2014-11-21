@@ -34,7 +34,7 @@ namespace snake
 			this.ImageMap = new System.Windows.Forms.PictureBox();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+			this.prograssbarSpeed = new System.Windows.Forms.ToolStripProgressBar();
 			this.textScore = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +47,7 @@ namespace snake
 			// timer1
 			// 
 			this.timer1.Enabled = true;
-			this.timer1.Interval = 250;
+			this.timer1.Interval = 500;
 			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 			// 
 			// ImageMap
@@ -65,7 +65,7 @@ namespace snake
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
+            this.prograssbarSpeed,
             this.textScore});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 524);
 			this.statusStrip1.Name = "statusStrip1";
@@ -79,14 +79,14 @@ namespace snake
 			this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
 			this.toolStripStatusLabel1.Text = "Speed";
 			// 
-			// toolStripProgressBar1
+			// prograssbarSpeed
 			// 
-			this.toolStripProgressBar1.Maximum = 25;
-			this.toolStripProgressBar1.Minimum = 1;
-			this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-			this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-			this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-			this.toolStripProgressBar1.Value = 1;
+			this.prograssbarSpeed.Maximum = 25;
+			this.prograssbarSpeed.Minimum = 1;
+			this.prograssbarSpeed.Name = "prograssbarSpeed";
+			this.prograssbarSpeed.Size = new System.Drawing.Size(100, 16);
+			this.prograssbarSpeed.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+			this.prograssbarSpeed.Value = 1;
 			// 
 			// textScore
 			// 
@@ -157,7 +157,7 @@ namespace snake
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem aaaToolStripMenuItem;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+		private System.Windows.Forms.ToolStripProgressBar prograssbarSpeed;
 		private System.Windows.Forms.ToolStripStatusLabel textScore;
 
 	}

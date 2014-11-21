@@ -16,6 +16,7 @@ namespace snake
 		private Random MyRandom;
 		private Player PlayerSnake;
 		private bool keyLock;
+		private int baseSpeed;
 		public Snake()
 		{
 			InitializeComponent();
@@ -26,7 +27,10 @@ namespace snake
 		{
 			p = ImageMap.Location;
 			MyRandom = new Random();
-			PlayerSnake = new Player(90, 100, p,Controls, MyRandom, textScore, timer1);
+			baseSpeed = 10;
+			timer1.Interval = 500 - baseSpeed * 17;
+			prograssbarSpeed.Value = baseSpeed;
+			PlayerSnake = new Player(90, 100, p,Controls, MyRandom, textScore, timer1, baseSpeed,prograssbarSpeed);
 			this.Update();
 		}
 

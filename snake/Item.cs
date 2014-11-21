@@ -24,20 +24,34 @@ namespace snake
 		public Point location;
 		private Point mapLocation;
 		private Random myRandom;
-		public void SetPosition()
+		public void SetPosition(Point[] playerLocation)
 		{
-			PositionX = myRandom.Next(1, 18);
-			PositionY = myRandom.Next(1, 18);
+			bool locationCollide = true;
+			while(locationCollide)
+			{
+				int i = 0;
+				PositionX = myRandom.Next(1, 18);
+				PositionY = myRandom.Next(1, 18);
+				locationCollide = false;
+				while (i<playerLocation.Length && !locationCollide)
+				{
+					if (playerLocation[i].X == PositionX && playerLocation[i].Y == PositionY)
+						locationCollide = true;
+					else
+						locationCollide = false;
+					i++;
+				}
+			}
 			location.X = PositionX * 25 + mapLocation.X;
 			location.Y = PositionY * 25 + mapLocation.Y;
 			myPictureBox.Location = location;
 			myPictureBox.Update();
 		}
-		public bool CollisinCheck(Point playerLocation)
+		public bool CollisinCheck(Point[] playerLocation)
 		{
-			if ((int)playerLocation.X == PositionX && (int)playerLocation.Y == PositionY)
+			if ((int)playerLocation[0].X == PositionX && (int)playerLocation[0].Y == PositionY)
 			{
-				this.SetPosition();
+				this.SetPosition(playerLocation);
 				return true;
 			}
 			else

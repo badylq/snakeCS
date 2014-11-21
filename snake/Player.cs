@@ -12,7 +12,7 @@ namespace snake
 	public class Player
 	{
 		public Player(int minLength, int maxLength, Point mapLocation, Control.ControlCollection control, Random myRandom,
-			ToolStripStatusLabel textScore, Timer timer)
+			ToolStripStatusLabel textScore, Timer timer, int baseSpeed, ToolStripProgressBar progressbarSpeed)
 		{
 			if (minLength < 3)
 				this.minLength = 3;
@@ -37,12 +37,15 @@ namespace snake
 			score = 0;
 			points = 10;
 			this.speedUps = 0;
+			this.progressbarSpeed = progressbarSpeed;
+			this.baseSpeed = baseSpeed;
 			this.timer = timer;
 			this.eatCounter = 0;
 			this.CreatePlayer();
 
 		}
 
+		ToolStripProgressBar progressbarSpeed;
 		private int eatCounter;
 		private ToolStripStatusLabel textScore;
 		private Random myRandom;
@@ -63,6 +66,8 @@ namespace snake
 		private bool extend;
 		private Timer timer;
 		private int speedUps;
+		private int baseSpeed;
+		private bool selfCrash;
 		private void CreatePlayer()
 		{
 			location = new Point[maxLength];
@@ -96,7 +101,7 @@ namespace snake
 			apple = new Item(this.points, this.itemApple, this.mapLocation, this.myRandom);
 			control.Add(itemApple);
 			itemApple.BringToFront();
-			apple.SetPosition();
+			apple.SetPosition(location);
 		}
 
 		private void addBodyPart(Point location, Image img)
@@ -164,16 +169,18 @@ namespace snake
 			if (this.extend)
 				this.extendSnake(tempLocation2);
 			this.DrawPlayer();
-			if(this.apple.CollisinCheck(this.location[0]))
+			if(this.apple.CollisinCheck(this.location))
 			{
 				this.score += this.points;
 				this.extend = true;
 				this.eatCounter += 1;
 				this.textScore.Text = "Score : " + this.score;
-				if(eatCounter>1 && timer.Interval>25)
+				if(eatCounter>=1 && this.speedUps+this.baseSpeed<25)
 				{
-					timer.Interval -= 50/speedUps;
+					timer.Interval -= 17;
 					this.speedUps += 1;
+					eatCounter = 0;
+					progressbarSpeed.Value += 1;
 				}
 			}
 			if (this.Colision())
@@ -269,7 +276,22 @@ namespace snake
 				return true;
 			}
 			else
-				return false;
+			{
+				int i = 1;
+				selfCrash = false;
+				while(!selfCrash && i<location.Length)
+				{
+					if (location[0].X == location[i].X && location[0].Y == location[i].Y)
+						//selfCrash = true;
+					else
+						selfCrash = false;
+					i++;
+				}
+				if (selfCrash == true)
+					return true;
+				else
+					return false;
+			}
 		}
 	}
 }
