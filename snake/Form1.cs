@@ -25,13 +25,7 @@ namespace snake
 
 		private void Snake_Load(object sender, EventArgs e)
 		{
-			p = ImageMap.Location;
-			MyRandom = new Random();
-			baseSpeed = 10;
-			timer1.Interval = 500 - baseSpeed * 17;
-			prograssbarSpeed.Value = baseSpeed;
-			PlayerSnake = new Player(90, 100, p,Controls, MyRandom, textScore, timer1, baseSpeed,prograssbarSpeed);
-			this.Update();
+			this.game();
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
@@ -56,5 +50,15 @@ namespace snake
 			}
 		}
 
+		private void game()
+		{
+			p = ImageMap.Location;
+			MyRandom = new Random();
+			baseSpeed = 1;
+			timer1.Interval = 500 - baseSpeed * 17;
+			prograssbarSpeed.Value = baseSpeed;
+			PlayerSnake = new Player(3, 100, p, Controls, MyRandom, textScore, timer1, baseSpeed, prograssbarSpeed);
+			this.Update();
+		}
 	}
 }

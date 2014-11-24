@@ -24,16 +24,16 @@ namespace snake
 		public Point location;
 		private Point mapLocation;
 		private Random myRandom;
-		public void SetPosition(Point[] playerLocation)
+		public void SetPosition(List<Point> playerLocation)
 		{
 			bool locationCollide = true;
-			while(locationCollide)
+			while (locationCollide)
 			{
 				int i = 0;
 				PositionX = myRandom.Next(1, 18);
 				PositionY = myRandom.Next(1, 18);
 				locationCollide = false;
-				while (i<playerLocation.Length && !locationCollide)
+				while (i < playerLocation.Count && !locationCollide)
 				{
 					if (playerLocation[i].X == PositionX && playerLocation[i].Y == PositionY)
 						locationCollide = true;
@@ -47,9 +47,9 @@ namespace snake
 			myPictureBox.Location = location;
 			myPictureBox.Update();
 		}
-		public bool CollisinCheck(Point[] playerLocation)
+		public bool CollisinCheck(List<Point> playerLocation)
 		{
-			if ((int)playerLocation[0].X == PositionX && (int)playerLocation[0].Y == PositionY)
+			if (playerLocation[0].X == PositionX && playerLocation[0].Y == PositionY)
 			{
 				this.SetPosition(playerLocation);
 				return true;

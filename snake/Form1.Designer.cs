@@ -39,6 +39,7 @@ namespace snake
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.aaaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.lolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.ImageMap)).BeginInit();
 			this.statusStrip1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
@@ -91,7 +92,7 @@ namespace snake
 			// textScore
 			// 
 			this.textScore.Name = "textScore";
-			this.textScore.Size = new System.Drawing.Size(313, 17);
+			this.textScore.Size = new System.Drawing.Size(344, 17);
 			this.textScore.Spring = true;
 			this.textScore.Text = "Score : 0";
 			this.textScore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -116,9 +117,17 @@ namespace snake
 			// 
 			// aaaToolStripMenuItem
 			// 
+			this.aaaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lolToolStripMenuItem});
 			this.aaaToolStripMenuItem.Name = "aaaToolStripMenuItem";
-			this.aaaToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+			this.aaaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.aaaToolStripMenuItem.Text = "aaa";
+			// 
+			// lolToolStripMenuItem
+			// 
+			this.lolToolStripMenuItem.Name = "lolToolStripMenuItem";
+			this.lolToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.lolToolStripMenuItem.Text = "lol";
 			// 
 			// Snake
 			// 
@@ -159,6 +168,7 @@ namespace snake
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.ToolStripProgressBar prograssbarSpeed;
 		private System.Windows.Forms.ToolStripStatusLabel textScore;
+		private System.Windows.Forms.ToolStripMenuItem lolToolStripMenuItem;
 
 	}
 }

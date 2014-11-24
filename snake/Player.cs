@@ -52,7 +52,7 @@ namespace snake
 		private List<PictureBox> ImageBodyParts;
 		private int minLength;
 		private int maxLength;
-		private Point[] location;
+		private List<Point> location;
 		private Point mapLocation;
 		private int positionX;
 		private int positionY;
@@ -70,11 +70,10 @@ namespace snake
 		private bool selfCrash;
 		private void CreatePlayer()
 		{
-			location = new Point[maxLength];
+			location = new List<Point>();
 			for (int i=0;i<minLength;i++)
 			{
-				location[i].X = 10;
-				location[i].Y = 10 + i;
+				location.Add(new Point(10,10+i));
 				if (i==0)
 				{
 					positionX = location[0].X;
@@ -122,6 +121,7 @@ namespace snake
 
 		private void extendSnake(Point newPartLocation)
 		{
+			location.Add(newPartLocation);
 			positionX = newPartLocation.X;
 			positionY = newPartLocation.Y;
 			positionXY.X = positionX * 25 + this.mapLocation.X ;
@@ -134,7 +134,7 @@ namespace snake
 			Point tempLocation1;
 			Point tempLocation2 = new Point(0,0);
 
-			for (int i = 0; i <= location.Length-1; i++)
+			for (int i = 0; i <= location.Count-1; i++)
 			{
 				if(i==0)
 				{
@@ -142,20 +142,19 @@ namespace snake
 					switch (this.direction)
 					{
 						case 0:
-							location[0].Y -= 1;
+							location[0] = new Point(location[0].X, location[0].Y - 1);
 							break;
 						case 1:
-							location[i].X += 1;
+							location[0] = new Point(location[0].X + 1, location[0].Y);
 							ImageBodyParts[i].Update();
 							break;
 						case 2:
-							location[i].Y += 1;
+							location[0] = new Point(location[0].X, location[0].Y + 1);
 							break;
 						case 3:
-							location[i].X -= 1;
+							location[0] = new Point(location[0].X - 1, location[0].Y);
 							break;
 						default:
-							MessageBox.Show("Błędny kierunek");
 							break;
 					}
 				}
@@ -171,11 +170,11 @@ namespace snake
 			this.DrawPlayer();
 			if(this.apple.CollisinCheck(this.location))
 			{
-				this.score += this.points;
+				this.score += (int)((float)this.points*(float)(progressbarSpeed.Value));
 				this.extend = true;
 				this.eatCounter += 1;
 				this.textScore.Text = "Score : " + this.score;
-				if(eatCounter>=1 && this.speedUps+this.baseSpeed<25)
+				if(eatCounter>=2 && this.speedUps+this.baseSpeed<25)
 				{
 					timer.Interval -= 17;
 					this.speedUps += 1;
@@ -233,7 +232,6 @@ namespace snake
 					}
 					break;
 				default:
-					MessageBox.Show("Zły klawisz");
 					break;
 			}
 
@@ -278,16 +276,15 @@ namespace snake
 			else
 			{
 				int i = 1;
-				selfCrash = false;
-				while(!selfCrash && i<location.Length)
+				int collisionList = 0;
+				//selfCrash = false;
+				while(i<location.Count)
 				{
 					if (location[0].X == location[i].X && location[0].Y == location[i].Y)
-						selfCrash = true;
-					else
-						selfCrash = false;
+						collisionList += 1;
 					i++;
 				}
-				if (selfCrash == true)
+				if (collisionList>0)
 					return true;
 				else
 					return false;
